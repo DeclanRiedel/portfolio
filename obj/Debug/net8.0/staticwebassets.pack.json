@@ -1,15 +1,15 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\decla\\portfolio\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\decla\\new\\portfolio\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\decla\\portfolio\\wwwroot\\images\\background.png",
+      "Id": "C:\\Users\\decla\\new\\portfolio\\wwwroot\\images\\background.png",
       "PackagePath": "staticwebassets\\images\\background.png"
     },
     {
-      "Id": "C:\\Users\\decla\\portfolio\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\decla\\new\\portfolio\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {

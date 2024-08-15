@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7ZNkRaUrz9k=",
+  "dgSpecHash": "qaSz5xcJw+c=",
   "success": true,
-  "projectFilePath": "C:\\Users\\decla\\portfolio\\portfolio.csproj",
+  "projectFilePath": "C:\\Users\\decla\\new\\portfolio\\portfolio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\decla\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.6\\microsoft.aspnetcore.authorization.8.0.6.nupkg.sha512",
     "C:\\Users\\decla\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.6\\microsoft.aspnetcore.components.8.0.6.nupkg.sha512",

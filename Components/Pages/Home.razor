@@ -3,73 +3,130 @@
 
 <PageTitle>Home</PageTitle>
 
-<div class="background-image"></div>
+<img src="images/background.png" class="background-image" alt="Background" />
 
 <div class="nav-links">
-    <MudNavMenu Color="Color.Transparent">
-        <MudNavLink Href="/skills" Class="custom-nav-link">Skills <MudIcon Icon="@Icons.Material.Filled.ArrowForward" /></MudNavLink>
-        <MudNavLink Href="/projects" Class="custom-nav-link">Projects <MudIcon Icon="@Icons.Material.Filled.ArrowForward" /></MudNavLink>
-        <MudNavLink Href="/about" Class="custom-nav-link">About Me <MudIcon Icon="@Icons.Material.Filled.ArrowForward" /></MudNavLink>
-    </MudNavMenu>
+    <MudStack>
+        <MudButton Class="custom-nav-button" OnClick="@(() => ToggleContent("Skills"))">
+            <span class="button-text">Skills</span>
+            <MudIcon Icon="@(activeContent == "Skills" ? Icons.Material.Filled.ArrowBack : Icons.Material.Filled.ArrowForward)" />
+        </MudButton>
+        <MudButton Class="custom-nav-button" OnClick="@(() => ToggleContent("Projects"))">
+            <span class="button-text">Projects</span>
+            <MudIcon Icon="@(activeContent == "Projects" ? Icons.Material.Filled.ArrowBack : Icons.Material.Filled.ArrowForward)" />
+        </MudButton>
+        <MudButton Class="custom-nav-button" OnClick="@(() => ToggleContent("About"))">
+            <span class="button-text">About Me</span>
+            <MudIcon Icon="@(activeContent == "About" ? Icons.Material.Filled.ArrowBack : Icons.Material.Filled.ArrowForward)" />
+        </MudButton>
+    </MudStack>
 </div>
+
+@if (!string.IsNullOrEmpty(activeContent))
+{
+    <div class="content-container @(isFadingOut ? "fade-out" : "")">
+        <h2>@activeContent</h2>
+        <p>This is some filler content for the @activeContent section.</p>
+    </div>
+}
 
 <style>
     .background-image {
         position: fixed;
-        left: 70%;
+        right: 1%;
         top: 50%;
-        transform: translate(-50%, -50%);
-        width: 66vw;
-        height: 66vh;
-        background-image: url('images/background.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
+        transform: translateY(-50%);
+        max-width: 50vw;
+        max-height: 66vh;
+        object-fit: contain;
+        object-position: right center;
         z-index: 0;
-        transition: transform 0.1s ease-out;
     }
 
     .nav-links {
         position: fixed;
-        left: 5%;
+        left: 8%;
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
     }
 
-    .custom-nav-link {
+    .custom-nav-button {
         font-weight: bold;
         font-size: 2rem;
         padding: 20px 0;
         color: white;
         background-color: transparent !important;
         transition: transform 0.2s ease-out;
+        justify-content: flex-start;
+        width: 100%;
     }
 
-    .custom-nav-link:hover {
+    .custom-nav-button:hover, .custom-nav-button.active {
         transform: translateX(10px);
         background-color: transparent !important;
     }
 
-    .custom-nav-link .mud-nav-link-text {
+    .custom-nav-button.active {
+        color: #9c27b0;
+    }
+
+    .button-text {
+        margin-right: 10px;
+    }
+
+    .content-container {
+        position: fixed;
+        left: calc(8% + 300px);
+        top: 0;
+        bottom: 0;
+        width: calc(49% - (8% + 300px));
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 20px;
+        overflow-y: auto;
+        z-index: 2;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        animation: fadeIn 0.3s ease-in-out;
     }
 
-    .custom-nav-link .mud-icon-root {
-        margin-left: 10px;
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
-    ::deep .mud-nav-link.mud-ripple {
-        background-color: transparent !important;
+    @@keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
     }
 
-    ::deep .mud-nav-link.active::before {
-        content: none !important;
+    .content-container.fade-out {
+        animation: fadeOut 0.3s ease-in-out;
     }
 </style>
 
 @code {
+    private string activeContent = "";
+    private bool isFadingOut = false;
+
+    private async Task ToggleContent(string content)
+    {
+        if (activeContent == content)
+        {
+            isFadingOut = true;
+            StateHasChanged();
+            await Task.Delay(300); // Wait for fade out animation
+            activeContent = "";
+            isFadingOut = false;
+        }
+        else
+        {
+            activeContent = content;
+        }
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
