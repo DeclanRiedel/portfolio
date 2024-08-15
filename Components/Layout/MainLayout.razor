@@ -1,0 +1,78 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+
+    <MudAppBar Bottom="true" Fixed="true" Elevation="0" Color="Color.Transparent" Class="social-links">
+        <MudGrid Justify="Justify.SpaceBetween" Class="w-100">
+            <MudItem xs="12" Class="d-flex justify-center">
+                <MudStack Row="true" Justify="Justify.Center" AlignItems="AlignItems.Center">
+                    <MudLink Href="mailto:shrek@swamp.com" Underline="Underline.None">
+                        <MudIcon Icon="@Icons.Material.Filled.Email" /> Email
+                    </MudLink>
+                    <MudLink Href="https://linkedin.com/in/shrek" Target="_blank" Underline="Underline.None">
+                        <MudIcon Icon="@Icons.Custom.Brands.LinkedIn" /> LinkedIn
+                    </MudLink>
+                    <MudLink Href="https://facebook.com/shrek" Target="_blank" Underline="Underline.None">
+                        <MudIcon Icon="@Icons.Custom.Brands.Facebook" /> Facebook
+                    </MudLink>
+                    <MudLink Href="https://twitter.com/shrek" Target="_blank" Underline="Underline.None">
+                        <MudIcon Icon="@Icons.Custom.Brands.Twitter" /> Twitter
+                    </MudLink>
+                    <MudLink Href="https://discord.gg/shrek" Target="_blank" Underline="Underline.None">
+                        <MudIcon Icon="@Icons.Custom.Brands.Discord" /> Discord
+                    </MudLink>
+                    <MudLink Href="https://github.com/shrek" Target="_blank" Underline="Underline.None">
+                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" /> GitHub
+                    </MudLink>
+                </MudStack>
+            </MudItem>
+        </MudGrid>
+    </MudAppBar>
+</MudLayout>
+
+<style>
+    body {
+        background: linear-gradient(135deg, 
+            #1a1a1a 0%, 
+            #1e2429 25%, 
+            #22292e 50%, 
+            #262e33 75%, 
+            #2a3338 100%);
+        background-size: 400% 400%;
+        animation: subtleShift 37.5s ease infinite;
+    }
+
+    @@keyframes subtleShift {
+        0% {
+            background-position: 0% 0%;
+        }
+        50% {
+            background-position: 100% 100%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+
+    .social-links .mud-link {
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .social-links .mud-link:hover {
+        text-decoration: underline;
+        transform: translateY(-2px);
+        color: #FFA07A; /* Light Salmon - for hover effect */
+    }
+
+    .social-links .mud-icon {
+        color: white;
+    }
+</style>

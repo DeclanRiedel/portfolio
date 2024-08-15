@@ -1,0 +1,80 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<PageTitle>Home</PageTitle>
+
+<div class="background-image"></div>
+
+<div class="nav-links">
+    <MudNavMenu Color="Color.Transparent">
+        <MudNavLink Href="/skills" Class="custom-nav-link">Skills <MudIcon Icon="@Icons.Material.Filled.ArrowForward" /></MudNavLink>
+        <MudNavLink Href="/projects" Class="custom-nav-link">Projects <MudIcon Icon="@Icons.Material.Filled.ArrowForward" /></MudNavLink>
+        <MudNavLink Href="/about" Class="custom-nav-link">About Me <MudIcon Icon="@Icons.Material.Filled.ArrowForward" /></MudNavLink>
+    </MudNavMenu>
+</div>
+
+<style>
+    .background-image {
+        position: fixed;
+        left: 70%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 66vw;
+        height: 66vh;
+        background-image: url('images/background.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 0;
+        transition: transform 0.1s ease-out;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    .custom-nav-link {
+        font-weight: bold;
+        font-size: 2rem;
+        padding: 20px 0;
+        color: white;
+        background-color: transparent !important;
+        transition: transform 0.2s ease-out;
+    }
+
+    .custom-nav-link:hover {
+        transform: translateX(10px);
+        background-color: transparent !important;
+    }
+
+    .custom-nav-link .mud-nav-link-text {
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-nav-link .mud-icon-root {
+        margin-left: 10px;
+    }
+
+    ::deep .mud-nav-link.mud-ripple {
+        background-color: transparent !important;
+    }
+
+    ::deep .mud-nav-link.active::before {
+        content: none !important;
+    }
+</style>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("addMouseMoveListener", ".background-image");
+        }
+    }
+}
