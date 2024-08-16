@@ -5,19 +5,19 @@
 
 <div class="content-wrapper">
     <div class="hero-section">
-        <img src="images/background.png" class="background-image" alt="Background" />
+        <img src="images/background.png" class="background-image" alt="Background" id="background-image" />
 
         <div class="nav-links">
             <MudStack>
-                <MudButton Class="custom-nav-button" Href="#skills">
+                <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("skills"))">
                     <span class="button-text">Skills</span>
                     <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
-                <MudButton Class="custom-nav-button" Href="#projects">
+                <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("projects"))">
                     <span class="button-text">Projects</span>
                     <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
-                <MudButton Class="custom-nav-button" Href="#about">
+                <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("about"))">
                     <span class="button-text">About Me</span>
                     <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
@@ -86,20 +86,20 @@
     .background-image {
         position: absolute;
         right: 1%;
-        top: 50%;
+        top: 45%;
         transform: translateY(-50%);
         max-width: 50vw;
         max-height: 66vh;
         object-fit: contain;
         object-position: right center;
         z-index: 0;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.1s ease-out;
     }
 
     .nav-links {
         position: absolute;
         left: 8%;
-        top: 50%;
+        top: 40%;
         transform: translateY(-50%);
         z-index: 1;
     }
@@ -143,5 +143,18 @@
     {
         public string Title { get; set; }
         public string Description { get; set; }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("addMouseMoveListener", "#background-image");
+        }
+    }
+
+    private async Task ScrollToSection(string sectionId)
+    {
+        await JS.InvokeVoidAsync("smoothScrollTo", sectionId);
     }
 }

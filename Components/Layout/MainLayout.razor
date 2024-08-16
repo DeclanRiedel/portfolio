@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JS
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -11,7 +12,10 @@
 
     <MudAppBar Bottom="true" Fixed="true" Elevation="0" Color="Color.Transparent" Class="social-links">
         <MudGrid Justify="Justify.SpaceBetween" Class="w-100">
-            <MudItem xs="12" Class="d-flex justify-center">
+            <MudItem xs="1">
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Inherit" OnClick="ScrollToTop" Class="scroll-to-top" />
+            </MudItem>
+            <MudItem xs="10" Class="d-flex justify-center">
                 <MudStack Row="true" Justify="Justify.Center" AlignItems="AlignItems.Center">
                     <MudLink Href="mailto:shrek@swamp.com" Underline="Underline.None" Class="d-flex align-center">
                         <MudIcon Icon="@Icons.Material.Filled.Email" Class="mr-2" />
@@ -39,6 +43,7 @@
                     </MudLink>
                 </MudStack>
             </MudItem>
+            <MudItem xs="1"></MudItem>
         </MudGrid>
     </MudAppBar>
 </MudLayout>
@@ -46,11 +51,11 @@
 <style>
     body {
         background: linear-gradient(135deg, 
-            #1a1a1a 0%, 
-            #1e2429 25%, 
-            #22292e 50%, 
-            #262e33 75%, 
-            #2a3338 100%);
+            #000080 0%, 
+            #000d33 25%, 
+            #001a66 50%, 
+            #002699 75%, 
+            #0033cc 100%);
         background-size: 400% 400%;
         animation: subtleShift 37.5s ease infinite;
     }
@@ -67,18 +72,42 @@
         }
     }
 
-    .social-links .mud-link {
+    .social-links .mud-link,
+    .social-links .mud-icon,
+    .scroll-to-top {
         color: white;
         transition: all 0.3s ease;
     }
 
-    .social-links .mud-link:hover {
+    .social-links .mud-link:hover,
+    .scroll-to-top:hover {
         text-decoration: underline;
         transform: translateY(-2px);
         color: #FFA07A; /* Light Salmon - for hover effect */
     }
 
-    .social-links .mud-icon {
-        color: white;
+    /* Custom scrollbar styles */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #000d33;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #0033cc;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #001a66;
     }
 </style>
+
+@code {
+    private async Task ScrollToTop()
+    {
+        await JS.InvokeVoidAsync("smoothScrollTo", 0);
+    }
+}
