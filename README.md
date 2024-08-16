@@ -1,0 +1,1 @@
+css animations later, the chatgpt logo favicon does not suffice, at all. 

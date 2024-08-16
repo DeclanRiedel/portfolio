@@ -1,11 +1,19 @@
 ﻿@page "/"
 @inject IJSRuntime JS
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Declan Riedel - Software Engineer</PageTitle>
 
 <div class="content-wrapper">
     <div class="hero-section">
         <img src="images/background.png" class="background-image" alt="Background" id="background-image" />
+
+        <div class="greeting">
+            <MudText Typo="Typo.h3" Class="greeting-text">
+                Hi, I'm <span class="name-highlight">Declan</span> 👋<br />
+                I Design, Build & Maintain Business Software<br />
+                for <span class="namibia-highlight">NAMIBIA</span>.
+            </MudText>
+        </div>
 
         <div class="nav-links">
             <MudStack Spacing="8">
@@ -23,56 +31,36 @@
     </div>
 
     <div class="sections-container">
+        <div id="about" class="about-section">
+            <h2 class="section-title">About Me</h2>
+            <MudText Align="Align.Center" Class="about-text">
+                This is some filler content for the About Me section. You can replace this with your actual information.
+            </MudText>
+        </div>
+
         <div id="skills" class="skills-section">
-            <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">Skills</MudText>
-            <MudGrid Justify="Justify.Center" Spacing="6">
-                <MudItem xs="12" sm="6" md="4">
-                    <div class="skill-card csharp">
-                        <img src="images/csharp-logo.png" alt="C# Logo" class="skill-logo" />
-                        <MudText Typo="Typo.h5" Class="mt-2">C#</MudText>
-                        <MudText>Experienced</MudText>
-                    </div>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <div class="skill-card js">
-                        <img src="images/javascript-logo.png" alt="JavaScript Logo" class="skill-logo" />
-                        <MudText Typo="Typo.h5" Class="mt-2">JavaScript</MudText>
-                        <MudText>Some Experience</MudText>
-                    </div>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <div class="skill-card dotnet">
-                        <img src="images/dotnet-logo.png" alt=".NET Logo" class="skill-logo" />
-                        <MudText Typo="Typo.h5" Class="mt-2">.NET</MudText>
-                        <MudText>Experienced</MudText>
-                    </div>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <div class="skill-card postgresql">
-                        <img src="images/postgresql-logo.png" alt="PostgreSQL Logo" class="skill-logo" />
-                        <MudText Typo="Typo.h5" Class="mt-2">PostgreSQL</MudText>
-                        <MudText>Experienced</MudText>
-                    </div>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <div class="skill-card linux">
-                        <img src="images/linux-logo.png" alt="Linux Logo" class="skill-logo" />
-                        <MudText Typo="Typo.h5" Class="mt-2">Linux</MudText>
-                        <MudText>Experienced</MudText>
-                    </div>
-                </MudItem>
-                <MudItem xs="12" sm="6" md="4">
-                    <div class="skill-card nix">
-                        <img src="images/nix-logo.png" alt="Nix Logo" class="skill-logo" />
-                        <MudText Typo="Typo.h5" Class="mt-2">Nix</MudText>
-                        <MudText>Experienced</MudText>
-                    </div>
-                </MudItem>
+            <h2 class="section-title">Skills</h2>
+            <MudText Align="Align.Center" Class="skills-text mb-4">
+                I like NixOS
+            </MudText>
+            <div class="white-line mb-4"></div>
+            <MudGrid Justify="Justify.Center" Spacing="2">
+                @foreach (var skill in skills)
+                {
+                    <MudItem xs="6" sm="4" md="3" lg="2">
+                        <MudCard Elevation="2" Class="@($"skill-card {skill.Class}")">
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Align="Align.Center">@skill.Name</MudText>
+                                <MudText Typo="Typo.body2" Align="Align.Center">@skill.ExperienceLevel</MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
             </MudGrid>
         </div>
 
         <div id="projects" class="projects-section">
-            <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">Projects</MudText>
+            <h2 class="section-title">Projects</h2>
             <MudGrid>
                 @foreach (var project in visibleProjects)
                 {
@@ -110,13 +98,6 @@
                 </div>
             }
         </div>
-
-        <div id="about" class="about-section">
-            <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">About Me</MudText>
-            <MudText Align="Align.Center" Class="about-text">
-                This is some filler content for the About Me section. You can replace this with your actual information.
-            </MudText>
-        </div>
     </div>
 </div>
 
@@ -151,7 +132,7 @@
     }
 
     .skills-section, .projects-section, .about-section {
-        padding: 4rem 0;
+        padding: 5rem 0;
         color: white;
     }
 
@@ -193,31 +174,96 @@
         box-shadow: 0 4px 20px rgba(255, 160, 122, 0.4);
     }
 
+    .skills-text {
+        font-size: 1.5rem;
+        line-height: 1.8;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .skill {
+        font-weight: bold;
+        padding: 2px 5px;
+        border-radius: 4px;
+    }
+
+    .csharp { color: #68217A; }
+    .js { color: #F0DB4F; }
+    .dotnet { color: #512BD4; }
+    .postgresql { color: #336791; }
+    .linux { color: #FCC624; }
+    .nix { color: #5277C3; }
+    .go { color: #00ADD8; }
+    .htmx { color: #3366CC; }
+
+    .white-line {
+        height: 2px;
+        background-color: white;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
     .skill-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-        border-radius: 8px;
-        transition: all 0.3s ease;
+        cursor: pointer;
+        transition: transform 0.2s;
     }
 
     .skill-card:hover {
         transform: translateY(-5px);
     }
 
-    .skill-logo {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
+    .csharp { background-color: #68217A; color: white; }
+    .js { background-color: #F0DB4F; color: black; }
+    .dotnet { background-color: #512BD4; color: white; }
+    .postgresql { background-color: #336791; color: white; }
+    .linux { background-color: #FCC624; color: black; }
+    .nix { background-color: #5277C3; color: white; }
+    .go { background-color: #00ADD8; color: white; }
+    .htmx { background-color: #3366CC; color: white; }
+
+    .greeting {
+        position: absolute;
+        left: 12%;
+        top: 1%;
+        z-index: 1;
     }
 
-    .csharp { background-color: #68217A; }
-    .js { background-color: #F0DB4F; color: #323330; }
-    .dotnet { background-color: #512BD4; }
-    .postgresql { background-color: #336791; }
-    .linux { background-color: #FCC624; color: #000000; }
-    .nix { background-color: #5277C3; }
+    .greeting-text {
+        color: white;
+        font-weight: bold;
+        font-size: 2.5rem;
+    }
+
+    .name-highlight {
+        color: #FFA07A;
+    }
+
+    .namibia-highlight {
+        color: #FFA07A;
+    }
+
+    .section-title {
+        text-align: center;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+        margin-bottom: 3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 120%;
+        height: 3px;
+        background-color: currentColor;
+        transform: translateX(-50%);
+    }
 </style>
 
 @code {
@@ -270,5 +316,31 @@
     private async Task ScrollToSection(string sectionId)
     {
         await JS.InvokeVoidAsync("smoothScrollTo", sectionId);
+    }
+
+    private List<Skill> skills = new List<Skill>
+    {
+        new Skill("C#", "csharp", "Experienced"),
+        new Skill("JavaScript", "js", "Lighter"),
+        new Skill(".NET", "dotnet", "Experienced"),
+        new Skill("PostgreSQL", "postgresql", "Experienced"),
+        new Skill("Linux", "linux", "Experienced"),
+        new Skill("NixOS/Nix", "nix", "Experienced"),
+        new Skill("Go", "go", "Lighter"),
+        new Skill("HTMX", "htmx", "Lighter")
+    };
+
+    public class Skill
+    {
+        public string Name { get; set; }
+        public string Class { get; set; }
+        public string ExperienceLevel { get; set; }
+
+        public Skill(string name, string cssClass, string experienceLevel)
+        {
+            Name = name;
+            Class = cssClass;
+            ExperienceLevel = experienceLevel;
+        }
     }
 }
