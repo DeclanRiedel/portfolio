@@ -33,7 +33,7 @@
         <div id="projects" class="projects-section">
             <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">Projects</MudText>
             <MudGrid>
-                @foreach (var project in projects)
+                @foreach (var project in visibleProjects)
                 {
                     <MudItem xs="12" sm="6" md="4">
                         <MudCard Elevation="4" Class="project-card">
@@ -50,6 +50,24 @@
                     </MudItem>
                 }
             </MudGrid>
+            
+            @if (projects.Count > 6)
+            {
+                <div class="d-flex justify-center mt-4">
+                    @if (visibleProjects.Count < projects.Count)
+                    {
+                        <MudButton Class="custom-nav-button mr-2" OnClick="LoadMoreProjects">
+                            Load More <MudIcon Icon="@Icons.Material.Filled.ExpandMore" />
+                        </MudButton>
+                    }
+                    @if (visibleProjects.Count > 6)
+                    {
+                        <MudButton Class="custom-nav-button" OnClick="UnloadProjects">
+                            Show Less <MudIcon Icon="@Icons.Material.Filled.ExpandLess" />
+                        </MudButton>
+                    }
+                </div>
+            }
         </div>
 
         <div id="about" class="about-section">
@@ -118,28 +136,19 @@
         color: white;
         background-color: transparent;
         border: none;
-        margin-bottom: 2rem;
         transition: all 0.3s ease;
-        font-size: 2.5rem;
+        font-size: 1.5rem;
         font-weight: bold;
         text-transform: none;
-        justify-content: flex-start;
-        padding: 0;
+        justify-content: center;
+        padding: 0.5rem 1rem;
         box-shadow: none;
     }
 
     .custom-nav-button:hover {
         color: #FFA07A; /* Light Salmon color */
-        transform: translateX(20px);
+        transform: translateY(-5px);
         background-color: transparent;
-    }
-
-    .custom-nav-button .mud-button-label {
-        justify-content: flex-start;
-    }
-
-    .custom-nav-button .mud-icon-root {
-        margin-left: 0.5rem;
     }
 
     .project-card {
@@ -155,18 +164,41 @@
 </style>
 
 @code {
+    public class Project
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+    }
+
     private List<Project> projects = new List<Project>
     {
         new Project { Title = "Project 1", Description = "Description of Project 1" },
         new Project { Title = "Project 2", Description = "Description of Project 2" },
         new Project { Title = "Project 3", Description = "Description of Project 3" },
         new Project { Title = "Project 4", Description = "Description of Project 4" },
+        new Project { Title = "Project 5", Description = "Description of Project 5" },
+        new Project { Title = "Project 6", Description = "Description of Project 6" },
+        new Project { Title = "Project 7", Description = "Description of Project 7" },
+        new Project { Title = "Project 8", Description = "Description of Project 8" },
+        new Project { Title = "Project 9", Description = "Description of Project 9" },
     };
 
-    private class Project
+    private List<Project> visibleProjects;
+
+    protected override void OnInitialized()
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        visibleProjects = projects.Take(6).ToList();
+    }
+
+    private void LoadMoreProjects()
+    {
+        int currentCount = visibleProjects.Count;
+        visibleProjects = projects.Take(Math.Min(currentCount + 3, projects.Count)).ToList();
+    }
+
+    private void UnloadProjects()
+    {
+        visibleProjects = projects.Take(6).ToList();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
