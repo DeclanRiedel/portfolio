@@ -9,22 +9,22 @@
 
         <div class="greeting">
             <MudText Typo="Typo.h3" Class="greeting-text">
-                Hi, I'm <span class="name-highlight">Declan</span> 👋<br />
+                Hi, I'm <span class="highlight">Declan</span> 👋<br />
                 I Design, Build & Maintain Business Software<br />
-                for <span class="namibia-highlight">NAMIBIA</span>.
+                for <span class="highlight">Namibian Enterprises</span>.
             </MudText>
         </div>
 
         <div class="nav-links">
             <MudStack Spacing="8">
+                <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("about"))">
+                    All About Me <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                </MudButton>
                 <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("skills"))">
-                    Skills <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                    Developer Skills <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
                 <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("projects"))">
-                    Projects <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
-                </MudButton>
-                <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("about"))">
-                    About Me <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                    Personal Projects <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
             </MudStack>
         </div>
@@ -41,7 +41,11 @@
         <div id="skills" class="skills-section">
             <h2 class="section-title">Skills</h2>
             <MudText Align="Align.Center" Class="skills-text mb-4">
-                I like NixOS
+                I specialize in developing <span class="highlight">.NET</span> applications, 
+                working with <span class="highlight">PostgreSQL</span> databases, 
+                and managing <span class="highlight">Linux</span> & <span class="highlight">NixOS</span> systems. 
+                Additionally, I have foundational knowledge in <span class="highlight">Go</span>, 
+                <span class="highlight">JavaScript</span>, and <span class="highlight">C++</span>.
             </MudText>
             <div class="white-line mb-4"></div>
             <MudGrid Justify="Justify.Center" Spacing="2">
@@ -66,14 +70,15 @@
                 {
                     <MudItem xs="12" sm="6" md="4">
                         <MudCard Elevation="4" Class="project-card">
+                            <MudCardMedia Image="@project.ImageUrl" Height="200" />
                             <MudCardHeader>
-                                <MudText Typo="Typo.h5">@project.Title</MudText>
+                                <MudText Typo="Typo.h5" Class="project-title">@project.Title</MudText>
                             </MudCardHeader>
-                            <MudCardContent>
-                                <MudText>@project.Description</MudText>
+                            <MudCardContent Class="project-description">
+                                <MudText>@((MarkupString)project.Description)</MudText>
                             </MudCardContent>
                             <MudCardActions>
-                                <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                                <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@project.GitHubUrl" Target="_blank">View on GitHub</MudButton>
                             </MudCardActions>
                         </MudCard>
                     </MudItem>
@@ -167,6 +172,9 @@
         background-color: rgba(30, 30, 30, 0.8);
         color: white;
         transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .project-card:hover {
@@ -175,26 +183,16 @@
     }
 
     .skills-text {
-        font-size: 1.5rem;
-        line-height: 1.8;
+        font-size: 1.2rem;
+        line-height: 1.6;
         text-align: center;
-        max-width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
     }
 
-    .skill {
-        font-weight: bold;
-        padding: 2px 5px;
-        border-radius: 4px;
+    .highlight {
+        color: #FFA07A;
     }
-
-    .csharp { color: #68217A; }
-    .js { color: #F0DB4F; }
-    .dotnet { color: #512BD4; }
-    .postgresql { color: #336791; }
-    .linux { color: #FCC624; }
-    .nix { color: #5277C3; }
-    .go { color: #00ADD8; }
-    .htmx { color: #3366CC; }
 
     .white-line {
         height: 2px;
@@ -206,20 +204,22 @@
     .skill-card {
         cursor: pointer;
         transition: transform 0.2s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .skill-card .mud-card-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .skill-card:hover {
         transform: translateY(-5px);
     }
-
-    .csharp { background-color: #68217A; color: white; }
-    .js { background-color: #F0DB4F; color: black; }
-    .dotnet { background-color: #512BD4; color: white; }
-    .postgresql { background-color: #336791; color: white; }
-    .linux { background-color: #FCC624; color: black; }
-    .nix { background-color: #5277C3; color: white; }
-    .go { background-color: #00ADD8; color: white; }
-    .htmx { background-color: #3366CC; color: white; }
 
     .greeting {
         position: absolute;
@@ -232,14 +232,6 @@
         color: white;
         font-weight: bold;
         font-size: 2.5rem;
-    }
-
-    .name-highlight {
-        color: #FFA07A;
-    }
-
-    .namibia-highlight {
-        color: #FFA07A;
     }
 
     .section-title {
@@ -264,6 +256,27 @@
         background-color: currentColor;
         transform: translateX(-50%);
     }
+
+    .project-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .project-description {
+        flex-grow: 1;
+        overflow: hidden;
+    }
+
+    .csharp { background-color: #178600; color: white; }
+    .js { background-color: #F0DB4F; color: black; }
+    .dotnet { background-color: #512BD4; color: white; }
+    .postgresql { background-color: #336791; color: white; }
+    .linux { background-color: #FCC624; color: black; }
+    .nix { background-color: #5277C3; color: white; }
+    .go { background-color: #00ADD8; color: white; }
+    .htmx { background-color: #3366cc; color: white; }
+    .cpp { background-color: #00599C; color: white; }
 </style>
 
 @code {
@@ -271,13 +284,30 @@
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public string GitHubUrl { get; set; }
     }
 
     private List<Project> projects = new List<Project>
     {
-        new Project { Title = "Project 1", Description = "Description of Project 1" },
-        new Project { Title = "Project 2", Description = "Description of Project 2" },
-        new Project { Title = "Project 3", Description = "Description of Project 3" },
+        new Project {
+            Title = "Container Inspection App",
+            Description = "A mobile application for container inspections, built with .NET MAUI.",
+            ImageUrl = "images/container-inspection-app.png",
+            GitHubUrl = "https://github.com/declanriedel/containerinspectionapp"
+        },
+        new Project {
+            Title = "Ncurses Chrome Dino Game",
+            Description = "A terminal-based recreation of the Chrome Dino game using Ncurses.",
+            ImageUrl = "images/ncurses-dino-game.png",
+            GitHubUrl = "https://github.com/declanriedel/ncurses_dinorunner"
+        },
+        new Project {
+            Title = "Web Terminal Emulator",
+            Description = "Fake terminal emulator made with Blazor.",
+            ImageUrl = "images/web-terminal-emulator.png",
+            GitHubUrl = "https://github.com/yourusername/web-terminal-emulator"
+        },
         new Project { Title = "Project 4", Description = "Description of Project 4" },
         new Project { Title = "Project 5", Description = "Description of Project 5" },
         new Project { Title = "Project 6", Description = "Description of Project 6" },
@@ -327,7 +357,8 @@
         new Skill("Linux", "linux", "Experienced"),
         new Skill("NixOS/Nix", "nix", "Experienced"),
         new Skill("Go", "go", "Lighter"),
-        new Skill("HTMX", "htmx", "Lighter")
+        new Skill("HTMX", "htmx", "Lighter"),
+        new Skill("C++", "cpp", "Lighter")
     };
 
     public class Skill

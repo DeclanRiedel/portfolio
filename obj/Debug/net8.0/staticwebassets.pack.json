@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\images\\background.png"
     },
     {
+      "Id": "C:\\Users\\decla\\portfolio\\wwwroot\\images\\csharp-logo.png",
+      "PackagePath": "staticwebassets\\images\\csharp-logo.png"
+    },
+    {
       "Id": "C:\\Users\\decla\\portfolio\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

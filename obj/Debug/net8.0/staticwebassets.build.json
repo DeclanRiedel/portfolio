@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jy7Q+TRqS15edfB4oU1ghFaJuUAfmmBXypq3G3ZxHD0=",
+  "Hash": "ZiXq/Xhjq9akWcDxUXT0bajCp+93BD6hn/919YPDFX0=",
   "Source": "portfolio",
   "BasePath": "_content/portfolio",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\background.png"
+    },
+    {
+      "Identity": "C:\\Users\\decla\\portfolio\\wwwroot\\images\\csharp-logo.png",
+      "SourceId": "portfolio",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\decla\\portfolio\\wwwroot\\",
+      "BasePath": "_content/portfolio",
+      "RelativePath": "images/csharp-logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\csharp-logo.png"
     },
     {
       "Identity": "C:\\Users\\decla\\portfolio\\wwwroot\\js\\site.js",
