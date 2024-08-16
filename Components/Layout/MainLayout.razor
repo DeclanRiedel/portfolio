@@ -13,33 +13,21 @@
     <MudAppBar Bottom="true" Fixed="true" Elevation="0" Color="Color.Transparent" Class="social-links">
         <MudGrid Justify="Justify.SpaceBetween" Class="w-100">
             <MudItem xs="1">
-                <MudIconButton Icon="@Icons.Material.Filled.ArrowUpward" Color="Color.Inherit" OnClick="ScrollToTop" Class="scroll-to-top" />
+                <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.ArrowUpward" OnClick="ScrollToTop" Size="Size.Small" Class="scroll-to-top" />
             </MudItem>
             <MudItem xs="10" Class="d-flex justify-center">
                 <MudStack Row="true" Justify="Justify.Center" AlignItems="AlignItems.Center">
-                    <MudLink Href="mailto:shrek@swamp.com" Underline="Underline.None" Class="d-flex align-center">
-                        <MudIcon Icon="@Icons.Material.Filled.Email" Class="mr-2" />
-                        <span>Email</span>
+                    <MudLink Href="https://github.com/yourusername" Target="_blank" Class="social-link">
+                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" Class="mr-2" /> GitHub
                     </MudLink>
-                    <MudLink Href="https://linkedin.com/in/shrek" Target="_blank" Underline="Underline.None" Class="d-flex align-center">
-                        <MudIcon Icon="@Icons.Custom.Brands.LinkedIn" Class="mr-2" />
-                        <span>LinkedIn</span>
+                    <MudLink Href="https://linkedin.com/in/yourusername" Target="_blank" Class="social-link">
+                        <MudIcon Icon="@Icons.Custom.Brands.LinkedIn" Class="mr-2" /> LinkedIn
                     </MudLink>
-                    <MudLink Href="https://facebook.com/shrek" Target="_blank" Underline="Underline.None" Class="d-flex align-center">
-                        <MudIcon Icon="@Icons.Custom.Brands.Facebook" Class="mr-2" />
-                        <span>Facebook</span>
+                    <MudLink Href="https://twitter.com/yourusername" Target="_blank" Class="social-link">
+                        <MudIcon Icon="@Icons.Custom.Brands.Twitter" Class="mr-2" /> Twitter
                     </MudLink>
-                    <MudLink Href="https://twitter.com/shrek" Target="_blank" Underline="Underline.None" Class="d-flex align-center">
-                        <MudIcon Icon="@Icons.Custom.Brands.Twitter" Class="mr-2" />
-                        <span>Twitter</span>
-                    </MudLink>
-                    <MudLink Href="https://discord.gg/shrek" Target="_blank" Underline="Underline.None" Class="d-flex align-center">
-                        <MudIcon Icon="@Icons.Custom.Brands.Discord" Class="mr-2" />
-                        <span>Discord</span>
-                    </MudLink>
-                    <MudLink Href="https://github.com/shrek" Target="_blank" Underline="Underline.None" Class="d-flex align-center">
-                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" Class="mr-2" />
-                        <span>GitHub</span>
+                    <MudLink Href="mailto:your.email@example.com" Class="social-link">
+                        <MudIcon Icon="@Icons.Material.Filled.Email" Class="mr-2" /> Email
                     </MudLink>
                 </MudStack>
             </MudItem>
@@ -72,18 +60,21 @@
         }
     }
 
-    .social-links .mud-link,
-    .social-links .mud-icon,
-    .scroll-to-top {
-        color: white;
-        transition: all 0.3s ease;
+    .social-link {
+        color: white !important;
+        transition: transform 0.3s ease;
+        padding: 8px 16px;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
     }
 
-    .social-links .mud-link:hover,
-    .scroll-to-top:hover {
-        text-decoration: underline;
-        transform: translateY(-2px);
-        color: #FFA07A; /* Light Salmon - for hover effect */
+    .social-link:hover {
+        transform: translateY(-5px);
+    }
+
+    .scroll-to-top {
+        background-color: rgba(255, 255, 255, 0.1) !important;
     }
 
     /* Custom scrollbar styles */
