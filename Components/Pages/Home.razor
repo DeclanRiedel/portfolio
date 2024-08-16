@@ -30,40 +30,34 @@
             </MudText>
         </div>
 
-        <MudCard id="projects" Elevation="8" Class="mb-16 custom-card">
-            <MudCardHeader>
-                <MudText Typo="Typo.h3">Projects</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudGrid>
-                    @foreach (var project in projects)
-                    {
-                        <MudItem xs="12" sm="6" md="4">
-                            <MudCard>
-                                <MudCardHeader>
-                                    <MudText Typo="Typo.h5">@project.Title</MudText>
-                                </MudCardHeader>
-                                <MudCardContent>
-                                    <MudText>@project.Description</MudText>
-                                </MudCardContent>
-                                <MudCardActions>
-                                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
-                                </MudCardActions>
-                            </MudCard>
-                        </MudItem>
-                    }
-                </MudGrid>
-            </MudCardContent>
-        </MudCard>
+        <div id="projects" class="projects-section">
+            <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">Projects</MudText>
+            <MudGrid>
+                @foreach (var project in projects)
+                {
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudCard Elevation="4" Class="project-card">
+                            <MudCardHeader>
+                                <MudText Typo="Typo.h5">@project.Title</MudText>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudText>@project.Description</MudText>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        </div>
 
-        <MudCard id="about" Elevation="8" Class="custom-card">
-            <MudCardHeader>
-                <MudText Typo="Typo.h3">About Me</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <p>This is some filler content for the About Me section.</p>
-            </MudCardContent>
-        </MudCard>
+        <div id="about" class="about-section">
+            <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">About Me</MudText>
+            <MudText Align="Align.Center" Class="about-text">
+                This is some filler content for the About Me section. You can replace this with your actual information.
+            </MudText>
+        </div>
     </div>
 </div>
 
@@ -97,20 +91,12 @@
         padding: 2rem;
     }
 
-    .custom-card {
-        background-color: rgba(30, 30, 30, 0.8);
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj4KICA8ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+CiAgICA8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPgogICAgPGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPgogIDwvZmlsdGVyPgogIDxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==');
-        background-blend-mode: overlay;
-        color: white;
-        margin-bottom: 2rem;
-    }
-
-    .skills-section {
+    .skills-section, .projects-section, .about-section {
         padding: 4rem 0;
         color: white;
     }
 
-    .skills-text {
+    .skills-text, .about-text {
         font-size: 1.5rem;
         font-weight: bold;
     }
@@ -152,6 +138,17 @@
 
     .custom-nav-button .mud-icon-root {
         margin-left: 0.5rem;
+    }
+
+    .project-card {
+        background-color: rgba(30, 30, 30, 0.8);
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(255, 160, 122, 0.4);
     }
 </style>
 
