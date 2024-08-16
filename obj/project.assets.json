@@ -705,11 +705,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\decla\\new\\portfolio\\portfolio.csproj",
+      "projectUniqueName": "C:\\Users\\decla\\portfolio\\portfolio.csproj",
       "projectName": "portfolio",
-      "projectPath": "C:\\Users\\decla\\new\\portfolio\\portfolio.csproj",
+      "projectPath": "C:\\Users\\decla\\portfolio\\portfolio.csproj",
       "packagesPath": "C:\\Users\\decla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\decla\\new\\portfolio\\obj\\",
+      "outputPath": "C:\\Users\\decla\\portfolio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\decla\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -79,3 +79,4 @@ C:\Users\decla\new\portfolio\obj\Debug\net8.0\refint\portfolio.dll
 C:\Users\decla\new\portfolio\obj\Debug\net8.0\portfolio.pdb
 C:\Users\decla\new\portfolio\obj\Debug\net8.0\portfolio.genruntimeconfig.cache
 C:\Users\decla\new\portfolio\obj\Debug\net8.0\ref\portfolio.dll
+C:\Users\decla\portfolio\obj\Debug\net8.0\portfolio.sourcelink.json

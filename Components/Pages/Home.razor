@@ -3,36 +3,88 @@
 
 <PageTitle>Home</PageTitle>
 
-<img src="images/background.png" class="background-image" alt="Background" />
+<div class="content-wrapper">
+    <div class="hero-section">
+        <img src="images/background.png" class="background-image" alt="Background" />
 
-<div class="nav-links">
-    <MudStack>
-        <MudButton Class="custom-nav-button" OnClick="@(() => ToggleContent("Skills"))">
-            <span class="button-text">Skills</span>
-            <MudIcon Icon="@(activeContent == "Skills" ? Icons.Material.Filled.ArrowBack : Icons.Material.Filled.ArrowForward)" />
-        </MudButton>
-        <MudButton Class="custom-nav-button" OnClick="@(() => ToggleContent("Projects"))">
-            <span class="button-text">Projects</span>
-            <MudIcon Icon="@(activeContent == "Projects" ? Icons.Material.Filled.ArrowBack : Icons.Material.Filled.ArrowForward)" />
-        </MudButton>
-        <MudButton Class="custom-nav-button" OnClick="@(() => ToggleContent("About"))">
-            <span class="button-text">About Me</span>
-            <MudIcon Icon="@(activeContent == "About" ? Icons.Material.Filled.ArrowBack : Icons.Material.Filled.ArrowForward)" />
-        </MudButton>
-    </MudStack>
+        <div class="nav-links">
+            <MudStack>
+                <MudButton Class="custom-nav-button" Href="#skills">
+                    <span class="button-text">Skills</span>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                </MudButton>
+                <MudButton Class="custom-nav-button" Href="#projects">
+                    <span class="button-text">Projects</span>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                </MudButton>
+                <MudButton Class="custom-nav-button" Href="#about">
+                    <span class="button-text">About Me</span>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                </MudButton>
+            </MudStack>
+        </div>
+    </div>
+
+    <div class="sections-container">
+        <MudCard id="skills" Elevation="3" Class="mb-16">
+            <MudCardHeader>
+                <MudText Typo="Typo.h3">Skills</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <p>This is some filler content for the Skills section.</p>
+            </MudCardContent>
+        </MudCard>
+
+        <MudCard id="projects" Elevation="3" Class="mb-16">
+            <MudCardHeader>
+                <MudText Typo="Typo.h3">Projects</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    @foreach (var project in projects)
+                    {
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h5">@project.Title</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText>@project.Description</MudText>
+                                </MudCardContent>
+                                <MudCardActions>
+                                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                                </MudCardActions>
+                            </MudCard>
+                        </MudItem>
+                    }
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+
+        <MudCard id="about" Elevation="3">
+            <MudCardHeader>
+                <MudText Typo="Typo.h3">About Me</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <p>This is some filler content for the About Me section.</p>
+            </MudCardContent>
+        </MudCard>
+    </div>
 </div>
 
-@if (!string.IsNullOrEmpty(activeContent))
-{
-    <div class="content-container @(isFadingOut ? "fade-out" : "")">
-        <h2>@activeContent</h2>
-        <p>This is some filler content for the @activeContent section.</p>
-    </div>
-}
-
 <style>
+    .content-wrapper {
+        min-height: 200vh;
+    }
+
+    .hero-section {
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
     .background-image {
-        position: fixed;
+        position: absolute;
         right: 1%;
         top: 50%;
         transform: translateY(-50%);
@@ -41,10 +93,11 @@
         object-fit: contain;
         object-position: right center;
         z-index: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links {
-        position: fixed;
+        position: absolute;
         left: 8%;
         top: 50%;
         transform: translateY(-50%);
@@ -62,76 +115,33 @@
         width: 100%;
     }
 
-    .custom-nav-button:hover, .custom-nav-button.active {
+    .custom-nav-button:hover {
         transform: translateX(10px);
         background-color: transparent !important;
-    }
-
-    .custom-nav-button.active {
-        color: #9c27b0;
     }
 
     .button-text {
         margin-right: 10px;
     }
 
-    .content-container {
-        position: fixed;
-        left: calc(8% + 300px);
-        top: 0;
-        bottom: 0;
-        width: calc(49% - (8% + 300px));
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 20px;
-        overflow-y: auto;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @@keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    @@keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-    }
-
-    .content-container.fade-out {
-        animation: fadeOut 0.3s ease-in-out;
+    .sections-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
     }
 </style>
 
 @code {
-    private string activeContent = "";
-    private bool isFadingOut = false;
-
-    private async Task ToggleContent(string content)
+    private List<Project> projects = new List<Project>
     {
-        if (activeContent == content)
-        {
-            isFadingOut = true;
-            StateHasChanged();
-            await Task.Delay(300); // Wait for fade out animation
-            activeContent = "";
-            isFadingOut = false;
-        }
-        else
-        {
-            activeContent = content;
-        }
-    }
+        new Project { Title = "Project 1", Description = "Description of Project 1" },
+        new Project { Title = "Project 2", Description = "Description of Project 2" },
+        new Project { Title = "Project 3", Description = "Description of Project 3" },
+    };
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private class Project
     {
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("addMouseMoveListener", ".background-image");
-        }
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 }
