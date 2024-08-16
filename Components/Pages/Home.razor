@@ -10,32 +10,27 @@
         <div class="nav-links">
             <MudStack>
                 <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("skills"))">
-                    <span class="button-text">Skills</span>
-                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                    Skills <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
                 <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("projects"))">
-                    <span class="button-text">Projects</span>
-                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                    Projects <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
                 <MudButton Class="custom-nav-button" OnClick="@(() => ScrollToSection("about"))">
-                    <span class="button-text">About Me</span>
-                    <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
+                    About Me <MudIcon Icon="@Icons.Material.Filled.ArrowDownward" />
                 </MudButton>
             </MudStack>
         </div>
     </div>
 
     <div class="sections-container">
-        <MudCard id="skills" Elevation="3" Class="mb-16">
-            <MudCardHeader>
-                <MudText Typo="Typo.h3">Skills</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <p>This is some filler content for the Skills section.</p>
-            </MudCardContent>
-        </MudCard>
+        <div id="skills" class="skills-section">
+            <MudText Typo="Typo.h2" Align="Align.Center" Class="mb-8">Skills</MudText>
+            <MudText Align="Align.Center" Class="skills-text">
+                I'm a <span class="highlight">(dotnet)</span> developer with skills in <span class="highlight">(postgres)</span> and linux & <span class="highlight">(nix)</span> systems
+            </MudText>
+        </div>
 
-        <MudCard id="projects" Elevation="3" Class="mb-16">
+        <MudCard id="projects" Elevation="8" Class="mb-16 custom-card">
             <MudCardHeader>
                 <MudText Typo="Typo.h3">Projects</MudText>
             </MudCardHeader>
@@ -61,7 +56,7 @@
             </MudCardContent>
         </MudCard>
 
-        <MudCard id="about" Elevation="3">
+        <MudCard id="about" Elevation="8" Class="custom-card">
             <MudCardHeader>
                 <MudText Typo="Typo.h3">About Me</MudText>
             </MudCardHeader>
@@ -96,38 +91,67 @@
         transition: transform 0.1s ease-out;
     }
 
+    .sections-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .custom-card {
+        background-color: rgba(30, 30, 30, 0.8);
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj4KICA8ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSI+CiAgICA8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPgogICAgPGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPgogIDwvZmlsdGVyPgogIDxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjA1Ii8+Cjwvc3ZnPg==');
+        background-blend-mode: overlay;
+        color: white;
+        margin-bottom: 2rem;
+    }
+
+    .skills-section {
+        padding: 4rem 0;
+        color: white;
+    }
+
+    .skills-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .highlight {
+        color: #FFA07A; /* Light Salmon color */
+        font-weight: bolder;
+    }
+
     .nav-links {
         position: absolute;
-        left: 8%;
-        top: 40%;
+        left: 12%;
+        top: 50%;
         transform: translateY(-50%);
         z-index: 1;
     }
 
     .custom-nav-button {
-        font-weight: bold;
-        font-size: 2rem;
-        padding: 20px 0;
         color: white;
-        background-color: transparent !important;
-        transition: transform 0.2s ease-out;
+        background-color: transparent;
+        border: none;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-transform: none;
         justify-content: flex-start;
-        width: 100%;
+        padding: 0;
     }
 
     .custom-nav-button:hover {
-        transform: translateX(10px);
-        background-color: transparent !important;
+        color: #FFA07A; /* Light Salmon color */
+        transform: translateX(20px);
     }
 
-    .button-text {
-        margin-right: 10px;
+    .custom-nav-button .mud-button-label {
+        justify-content: flex-start;
     }
 
-    .sections-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
+    .custom-nav-button .mud-icon-root {
+        margin-left: 0.5rem;
     }
 </style>
 
@@ -137,6 +161,7 @@
         new Project { Title = "Project 1", Description = "Description of Project 1" },
         new Project { Title = "Project 2", Description = "Description of Project 2" },
         new Project { Title = "Project 3", Description = "Description of Project 3" },
+        new Project { Title = "Project 4", Description = "Description of Project 4" },
     };
 
     private class Project
