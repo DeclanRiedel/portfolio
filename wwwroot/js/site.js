@@ -22,3 +22,7 @@ window.addMouseMoveListener = function (selector) {
         backgroundImage.style.transform = `translate(${xAxis}px, calc(-50% + ${yAxis}px))`;
     });
 }
+
+window.scrollToTop = function() {
+    window.scrollTo(0, 0);
+}
